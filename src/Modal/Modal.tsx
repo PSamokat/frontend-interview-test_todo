@@ -5,13 +5,13 @@ import React from "react";
 import "./Modal.css";
 
 interface ModalProps {
-  item?: {
+  item?: {// TODO: передлать на CategoryItem | TaskItem
     id: string;
     name: string;
     description: string;
     category?: string;
   };
-  active: boolean;
+  active: boolean; // TODO: Булевые переменные через is
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
   clearState?(): void;
@@ -25,8 +25,10 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <div
-      className={active ? "modal active" : "modal"}
+        // TODO: класс modal постоянный, вынести его из тернарного оператора
+      className={active ? "modal active" : "modal" }
       onClick={() => {
+        // TODO: Вынести колбек в отдельную функцию, можно упростить: clearState?.()
         clearState && clearState();
         setActive(false);
       }}

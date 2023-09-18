@@ -4,13 +4,15 @@ import { useSelector } from "react-redux";
 
 /* APPLICATION */
 import down from "../icons/down.svg";
+// TODO: Переименовать в iconDownArrow
 import { selectAllCategories } from "../features/categoriesSlice";
 
 interface ModalDropdownProps {
-  selected: string | undefined;
+  selected: string | undefined; // TODO: Переименовать в selectedCategoryName
   setSelected: React.Dispatch<React.SetStateAction<string>>;
 }
 
+// TODO: добавить импорт React
 export const ModalDropdown: React.FC<ModalDropdownProps> = ({
   selected,
   setSelected,
@@ -19,10 +21,16 @@ export const ModalDropdown: React.FC<ModalDropdownProps> = ({
     options = useSelector(selectAllCategories);
 
   return (
+      // TODO: Некорректный БЭМ нейминг
     <div className="dropdown" onClick={() => setIsActive(!isActive)}>
       <span className="dropdown-label">Категория</span>
-      <div className={selected ? "dropdown-btn" : "dropdown-btn placeholder"}>
-        {options.find((option) => option.id === selected)?.name ||
+        {
+            // TODO: класс dropdown-btn постоянный, вынести его из тернарного оператора
+        }
+      <div className={selected ? "dropdown-btn" : "dropdown-btn placeholder" }  >
+
+        {// TODO: Обернуть в useMemo, назвать itemCategory
+            options.find((option) => option.id === selected)?.name ||
           "Выберите категорию"}
         <img src={down} alt="open dropdown" />
       </div>
@@ -32,6 +40,7 @@ export const ModalDropdown: React.FC<ModalDropdownProps> = ({
             <div
               className="dropdown-item"
               onClick={() => {
+                  // TODO: Вынести кобек в функцию
                 setSelected(option.id);
                 setIsActive(false);
               }}

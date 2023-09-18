@@ -10,6 +10,7 @@ export interface CategoriesState {
   name: string;
   description: string;
 }
+// TODO: Некорректный нейминг, по логике это CategoriesItem, перенести этот тип в common/types, вместо него добавить тип InitialState = Array<CategoriesItem>
 
 const initialState: CategoriesState[] = [
   {
@@ -28,11 +29,13 @@ const initialState: CategoriesState[] = [
     description: "Описание может быть длинным",
   },
 ];
+// TODO: Заменить тип на InitialState
 
 export const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
+    // TODO: Типизировать аргументы каждого редюсера (state: InitialState, action: PayloadAction<*Тип вызываемого action*>)
     categoriesAdded: (state, action) => {
       state.push({
         id: uuidv4(),
@@ -52,8 +55,11 @@ export const categoriesSlice = createSlice({
       state: CategoriesState[],
       action: PayloadAction<string>
     ) => {
+      // TODO: Не жалеть буквы на именование переменных нап. categoryToRemove, мутабельность переменной не нужна, объявить ее через const
+      // TODO: убрать неиспользуемые агрументы
       let rm = (el: CategoriesState, i: number, arr: CategoriesState[]) =>
           el.id === action.payload,
+          // TODO: Переименовать, здесь ищется не Task a Category, каждую переменную обьявить отдельно, не через запятую
         rmTaskIndex = state.findIndex(rm);
 
       state.splice(rmTaskIndex, 1);
@@ -64,6 +70,7 @@ export const categoriesSlice = createSlice({
 export const { categoriesAdded, categoriesUpdated, categoriesRemoved } =
   categoriesSlice.actions;
 
+// TODO: Селекторы вынести в отдельный файл
 export const selectAllCategories = (state: RootState) => state.categories;
 
 export default categoriesSlice.reducer;

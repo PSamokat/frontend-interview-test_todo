@@ -1,5 +1,5 @@
 /* VENDOR */
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 /* APPLICATION */
@@ -11,6 +11,8 @@ export interface CategoriesState {
   description: string;
   category: string;
 }
+// TODO: Некорректный нейминг, по логике это TaskItem, перенести этот тип в common/types, вместо него добавить тип InitialState = Array<TaskItem>
+
 
 const initialState: CategoriesState[] = [
   {
@@ -32,11 +34,12 @@ const initialState: CategoriesState[] = [
     category: "",
   },
 ];
-
+// TODO: Заменить тип на InitialState
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    // TODO: Типизировать аргументы каждого редюсера (state: InitialState, action: PayloadAction<*Тип вызываемого action*>)
     tasksAdded: (state, action) => {
       state.push({
         id: uuidv4(),
@@ -54,13 +57,17 @@ export const tasksSlice = createSlice({
       }
     },
     tasksRemoved: (state, action) => {
+      // TODO: Не жалеть буквы на именование переменных нап. categoryToRemove, мутабельность переменной не нужна, объявить ее через const
+      // TODO: убрать неиспользуемые агрументы
       let rm = (el: CategoriesState, i: number, arr: CategoriesState[]) =>
           el.id === action.payload,
+          // TODO: Переименоватьп , каждую переменную обьявить отдельно, не через запятую
         rmTaskIndex = state.findIndex(rm);
 
       state.splice(rmTaskIndex, 1);
     },
     tasksClearedCategories: (state, action) => {
+      // TODO: Функцию map возвращает новый массив, в данном случае стейт не изменится
       state.map((task) => {
         if (task.category === action.payload) task.category = "";
       });
@@ -75,6 +82,7 @@ export const {
   tasksClearedCategories,
 } = tasksSlice.actions;
 
+// TODO: Селекторы вынести в отдельный файл
 export const selectAllTasks = (state: RootState) => state.tasks;
 
 export default tasksSlice.reducer;

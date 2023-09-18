@@ -14,10 +14,11 @@ import { tasksAdded } from "../features/tasksSlice";
 import { categoriesAdded } from "../features/categoriesSlice";
 
 interface ModalCreateItemProps {
-  active: boolean;
+  active: boolean; // TODO: Булевые переменные через is
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+// TODO: добавить импорт React
 export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
   active,
   setActive,
@@ -25,10 +26,10 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
   const dispatch = useDispatch(),
     { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
-    [name, setName] = useState(""),
-    [selected, setSelected] = useState(""),
-    [description, setDescription] = useState("");
-
+    [name, setName] = useState(""), // TODO: Переименовать в itemName
+    [selected, setSelected] = useState(""), // TODO: Переименовать в selectedCategoryName
+    [description, setDescription] = useState(""); // TODO: Переименовать в descriptionText
+    // TODO: Каждую переменую обьявить отдельно
   function clearState() {
     setName("");
     setDescription("");
@@ -62,6 +63,7 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
         submitBtnText="Создать"
         size="large"
         onSubmit={
+            // TODO: Вынести колбек в функцию
           name
             ? () => {
                 dispatch(
@@ -70,6 +72,7 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
                     : tasksAdded({
                         name,
                         description,
+                          // TODO: Ошибка. Используется сеттер стейта вместо значения
                         category: setSelected,
                       })
                 );

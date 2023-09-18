@@ -14,16 +14,17 @@ import { tasksUpdated } from "../features/tasksSlice";
 import { categoriesUpdated } from "../features/categoriesSlice";
 
 interface ModalEditItemProps {
-  item: {
+  item: { // TODO: передлать на CategoryItem | TaskItem
     id: string;
     name: string;
     description: string;
     category?: string;
   };
-  active: boolean;
+  active: boolean; // TODO: Булевые переменные через is
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+// TODO: Добавить импорт React
 export const ModalEditItem: React.FC<ModalEditItemProps> = ({
   item,
   active,
@@ -32,9 +33,10 @@ export const ModalEditItem: React.FC<ModalEditItemProps> = ({
   const dispatch = useDispatch(),
     { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
-    [name, setName] = useState(item.name),
-    [selected, setSelected] = useState(item.category || ""),
-    [description, setDescription] = useState(item.description);
+    [name, setName] = useState(item.name), // TODO: Переименовать в itemName
+    [selected, setSelected] = useState(item.category || ""), // TODO: Переименовать в selectedCategoryName
+    [description, setDescription] = useState(item.description); // TODO: Переименовать в descriptionText
+    // TODO: Каждую переменую обьявить отдельно
 
   return (
     <Modal item={item} active={active} setActive={setActive}>
@@ -63,6 +65,7 @@ export const ModalEditItem: React.FC<ModalEditItemProps> = ({
         submitBtnText="Сохранить"
         size="large"
         onSubmit={() => {
+            // TODO: Вынести колбек в одельную функцию
           dispatch(
             isCategories
               ? categoriesUpdated({ id: item.id, name, description })

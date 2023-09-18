@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { ListItem } from "./ListItem";
 import { selectAllCategories } from "../features/categoriesSlice";
 
+
+// TODO: Типизировать компонент
 export const Categories = () => {
   const categories = useSelector(selectAllCategories);
 

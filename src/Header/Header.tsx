@@ -6,12 +6,16 @@ import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 import { ModalCreateItem } from "../Modal/ModalCreateItem";
 
+// TODO: Типизировать компонент
 export const Header = () => {
   const { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
+      // TODO: Булевые переменные должны начинатся с is, has, can итд, они одлжны отвечать на вопрос да:нет
     [createModalActive, setCreateModalActive] = useState(false);
+    // TODO: Каждую переменую обьявить отдельно
 
   return (
+      // TODO: Некорректный БЭМ нейминг
     <header className="header">
       <h1 className="header-title">ToDo List</h1>
       <nav className="header-nav">

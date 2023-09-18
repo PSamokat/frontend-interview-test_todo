@@ -1,12 +1,13 @@
 import "./ModalBtn.css";
-
 interface ModalBtnProps {
+// TODO: type и size типизировать через enum
   type?: string;
   children: React.ReactNode;
   size?: string;
   onClick: () => void;
 }
 
+// TODO: добавить импорт React
 export const ModalBtn: React.FC<ModalBtnProps> = ({
   type,
   children,
