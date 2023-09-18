@@ -11,6 +11,9 @@ html {
   justify-content: space-between;
   width: 1000px;
   height: 80px;
+  /*При длинных названий и описаниях текст будет выходить за границы блока
+    Чтобы это исправить можно использовать свойство min-height: 80px
+  */
   border-bottom: 2px solid #3f72af;
 }
 
@@ -55,6 +58,9 @@ html {
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
+  /*
+    Добавить свойство word-break: break-word;
+  */
 }
 
 .list-item-col2__btn {
